@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Intuji\Events;
-
 use Dotenv\Dotenv;
 
 // Init the autoloader
