@@ -22,4 +22,12 @@ final class GoogleAuth
         $this->googleClient->addScope(Google_Service_Calendar::CALENDAR_READONLY);
         $this->googleClient->addScope(Google_Service_Calendar::CALENDAR_EVENTS);
     }
+
+    /**
+     * Get the URL for user authentication
+     */
+    public function getAuthUrl(): string
+    {
+        return $this->googleClient->createAuthUrl();
+    }
 }
