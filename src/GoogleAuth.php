@@ -49,4 +49,12 @@ final class GoogleAuth
     {
         $this->googleClient->setAccessToken($accessToken);
     }
+
+    /**
+     * Revoke the access token from Google
+     */
+    public function revokeToken(): void
+    {
+        $this->googleClient->revokeToken();
+    }
 }
