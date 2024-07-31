@@ -53,4 +53,23 @@ final class GoogleCalendar
 
         return $res->status === 'confirmed';
     }
+
+    /**
+     * Delete an event from the Google Calendar
+     * @throws Exception
+     */
+    public function deleteEvent($eventId, $calendarId = 'primary'): bool
+    {
+        // Get the Google client
+        $client = (new GoogleAuth())->getClient();
+        $client->setAccessToken($_SESSION['access_token']);
+
+        // Get the Google Calendar service
+        $service = new Google_Service_Calendar($client);
+
+        // Delete the event
+        $res = $service->events->delete($calendarId, $eventId);
+
+        return $res->status === 'confirmed';
+    }
 }
