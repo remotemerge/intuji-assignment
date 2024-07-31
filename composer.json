@@ -1,0 +1,37 @@
+{
+  "name": "remotemerge/intuji-assignment",
+  "type": "project",
+  "description": "Using core PHP to connect with Google Calendar.",
+  "authors": [
+    {
+      "name": "Madan Sapkota",
+      "email": "contact+gh@madansapkota.com"
+    }
+  ],
+  "license": "proprietary",
+  "require": {
+    "php": "^8.3"
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^3.60.0",
+    "phpunit/phpunit": "^11.2.8",
+    "rector/rector": "^1.2.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "Intuji\\GoogleCalendar\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "preferred-install": "dist",
+    "sort-packages": true
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true
+}
