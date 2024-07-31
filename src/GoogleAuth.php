@@ -30,4 +30,13 @@ final class GoogleAuth
     {
         return $this->googleClient->createAuthUrl();
     }
+
+    /**
+     * Get the access token using the code
+     */
+    public function getAccessToken(string $code): string
+    {
+        $res = $this->googleClient->fetchAccessTokenWithAuthCode($code);
+        return $res['access_token'];
+    }
 }
