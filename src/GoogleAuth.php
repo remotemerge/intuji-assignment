@@ -26,6 +26,14 @@ final class GoogleAuth
     }
 
     /**
+     * Get the Google client
+     */
+    public function getClient(): Google_Client
+    {
+        return $this->googleClient;
+    }
+
+    /**
      * Get the URL for user authentication
      */
     public function getAuthUrl(): string
