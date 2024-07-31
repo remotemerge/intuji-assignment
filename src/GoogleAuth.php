@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Intuji\Events;
 
 use Google_Client;
@@ -38,5 +40,13 @@ final class GoogleAuth
     {
         $res = $this->googleClient->fetchAccessTokenWithAuthCode($code);
         return $res['access_token'];
+    }
+
+    /**
+     * Set the access token to the Google client
+     */
+    public function setAccessToken(string $accessToken): void
+    {
+        $this->googleClient->setAccessToken($accessToken);
     }
 }
