@@ -9,18 +9,11 @@ require dirname(__DIR__) . '/bootstrap/app.php';
 $client = (new Intuji\Events\GoogleAuth())->getClient();
 
 // Access token is not available
-if (!isset($_SESSION['access_token'])) {
+if (!isset($_SESSION['access_token']) || $client->isAccessTokenExpired()) {
     //  Redirect to login page
     $authUrl = (new Intuji\Events\GoogleAuth())->getAuthUrl();
     header('Location: ' . $authUrl);
+} else {
+    // Redirect to the home page
+    header('Location: /');
 }
-
-// Check if access token is expired
-if ($client->isAccessTokenExpired()) {
-    // Refresh the access token
-    $client->fetchAccessTokenWithRefreshToken($client->getRefreshToken());
-    $_SESSION['access_token'] = $client->getAccessToken();
-}
-
-// Redirect to the home page
-header('Location: /');
