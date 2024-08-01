@@ -20,6 +20,13 @@ if (!isset($_SESSION['access_token'])) {
     header('Location: /');
 }
 
+// Access token is expired
+if ($client->isAccessTokenExpired()) {
+    unset($_SESSION['access_token']);
+    // Redirect to home page
+    header('Location: /');
+}
+
 // Get the Google Calendar service
 $service = new Google_Service_Calendar($client);
 
@@ -37,11 +44,26 @@ $end = new Google_Service_Calendar_EventDateTime();
 $end->setDateTime(str_replace(' ', '', $_POST['end_date']) . ':59+05:45');
 $event->setEnd($end);
 
+$calendar = new Intuji\Events\GoogleCalendar();
+$event = [
+    'summary' => $_POST['summary'],
+    'location' => $_POST['location'] ?? '',
+    'description' => $_POST['description'] ?? '',
+    'start' => [
+        'dateTime' => str_replace(' ', '', $_POST['start_date']) . ':00+05:45',
+        'timeZone' => 'Asia/Kathmandu',
+    ],
+    'end' => [
+        'dateTime' => str_replace(' ', '', $_POST['end_date']) . ':59+05:45',
+        'timeZone' => 'Asia/Kathmandu',
+    ],
+];
+
 // Insert the event
 try {
-    $event = $service->events->insert('primary', $event);
-    if ($event && $event->getId()) {
-        $_SESSION['success'] = 'Event added successfully. Event ID: ' . $event->getId();
+    $event = $calendar->createEvent($event);
+    if ($event) {
+        $_SESSION['success'] = 'The event has been added successfully.';
     }
 } catch (\Google\Service\Exception $e) {
     // Print the error message
