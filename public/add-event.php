@@ -65,9 +65,9 @@ try {
     if ($event) {
         $_SESSION['success'] = 'The event has been added successfully.';
     }
-} catch (\Google\Service\Exception $e) {
+} catch (\Google\Service\Exception $exception) {
     // Print the error message
-    echo $e->getMessage();
+    echo $exception->getMessage();
     exit;
 }
 

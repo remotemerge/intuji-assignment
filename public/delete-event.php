@@ -32,9 +32,9 @@ try {
     $calendar = new Intuji\Events\GoogleCalendar();
     $calendar->deleteEvent($_POST['id']);
     $_SESSION['success'] = 'The event has been deleted successfully.';
-} catch (\Google\Service\Exception $e) {
+} catch (\Google\Service\Exception $exception) {
     // Print the error message
-    echo $e->getMessage();
+    echo $exception->getMessage();
     exit;
 }
 
