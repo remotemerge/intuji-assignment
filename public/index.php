@@ -1,4 +1,5 @@
 <?php include_once __DIR__ . '/../bootstrap/app.php'; ?>
+<?php include_once __DIR__ . '/functions.php'; ?>
 <?php include_once __DIR__ . '/events.php'; ?>
 <!doctype html>
 <html lang="en">
@@ -92,8 +93,8 @@
                                    referrerpolicy="no-referrer"><?= $event->summary ?></a></td>
                             <td><?= $event->location ?></td>
                             <td><?= $event->description ?></td>
-                            <td><?= $event->start->dateTime ?></td>
-                            <td><?= $event->end->dateTime ?></td>
+                            <td class="text-nowrap"><?= formatDate($event->start->dateTime) ?></td>
+                            <td class="text-nowrap"><?= formatDate($event->end->dateTime) ?></td>
                             <td class="text-center">
                                 <form action="/delete-event.php" method="post">
                                     <input type="hidden" name="id" value="<?= $event->id ?>">
