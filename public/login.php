@@ -8,11 +8,8 @@ require dirname(__DIR__) . '/bootstrap/app.php';
 // Get the Google client
 $client = (new Intuji\Events\GoogleAuth())->getClient();
 
-// Access token is available
-if (isset($_SESSION['access_token'])) {
-    // Set the access token
-    $client->setAccessToken($_SESSION['access_token']);
-} else {
+// Access token is not available
+if (!isset($_SESSION['access_token'])) {
     //  Redirect to login page
     $authUrl = (new Intuji\Events\GoogleAuth())->getAuthUrl();
     header('Location: ' . $authUrl);
