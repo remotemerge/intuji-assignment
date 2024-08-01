@@ -30,11 +30,11 @@ $event->setLocation($_POST['location'] ?? '');
 $event->setDescription($_POST['description'] ?? '');
 
 $start = new Google_Service_Calendar_EventDateTime();
-$start->setDateTime($_POST['start_date'] . 'T00:00:00+05:45');
+$start->setDateTime(str_replace(' ', '', $_POST['start_date']) . ':00+05:45');
 $event->setStart($start);
 
 $end = new Google_Service_Calendar_EventDateTime();
-$end->setDateTime($_POST['end_date'] . 'T23:59:59+05:45');
+$end->setDateTime(str_replace(' ', '', $_POST['end_date']) . ':59+05:45');
 $event->setEnd($end);
 
 // Insert the event
