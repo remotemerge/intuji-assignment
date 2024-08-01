@@ -34,7 +34,7 @@
     <div class="row mt-5">
         <div class="col-md-6">
             <h2>Add Event</h2>
-            <form action="/add-event.php" method="post">
+            <form action="/add-event.php" method="post" id="event_form">
                 <div class="mb-3">
                     <label for="summary" class="form-label">Summary</label>
                     <input type="text" class="form-control" id="summary" name="summary" required>
@@ -49,11 +49,11 @@
                 </div>
                 <div class="mb-3">
                     <label for="start_date" class="form-label">Start Date</label>
-                    <input type="date" class="form-control" id="start_date" name="start_date" required>
+                    <input type="datetime-local" class="form-control" id="start_date" name="start_date" required>
                 </div>
                 <div class="mb-3">
                     <label for="end_date" class="form-label">End Date</label>
-                    <input type="date" class="form-control" id="end_date" name="end_date" required>
+                    <input type="datetime-local" class="form-control" id="end_date" name="end_date" required>
                 </div>
                 <?php if (isset($_SESSION['access_token'])): ?>
                     <button type="submit" class="btn btn-primary">Add Event</button>
@@ -88,7 +88,8 @@
                 <?php if (!empty($events)): ?>
                     <?php foreach ($events as $event): ?>
                         <tr>
-                            <td><a href="<?= $event->htmlLink ?>" target="_blank" referrerpolicy="no-referrer"><?= $event->summary ?></a></td>
+                            <td><a href="<?= $event->htmlLink ?>" target="_blank"
+                                   referrerpolicy="no-referrer"><?= $event->summary ?></a></td>
                             <td><?= $event->location ?></td>
                             <td><?= $event->description ?></td>
                             <td><?= $event->start->dateTime ?></td>
@@ -112,4 +113,21 @@
     </div>
 </div>
 </body>
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('event_form');
+        const startDateInput = document.getElementById('start_date');
+        const endDateInput = document.getElementById('end_date');
+
+        form.addEventListener('submit', (event) => {
+            const startDate = new Date(startDateInput.value);
+            const endDate = new Date(endDateInput.value);
+
+            if (endDate <= startDate) {
+                event.preventDefault();
+                alert('End date must be later than start date.');
+            }
+        });
+    });
+</script>
 </html>
