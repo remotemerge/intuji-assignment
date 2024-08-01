@@ -8,6 +8,12 @@ require dirname(__DIR__) . '/bootstrap/app.php';
 // Get the Google client
 $client = (new Intuji\Events\GoogleAuth())->getClient();
 
+// Not post request
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    // Redirect to home page
+    header('Location: /');
+}
+
 // Access token is not available
 if (!isset($_SESSION['access_token'])) {
     //  Redirect to home page
