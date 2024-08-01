@@ -1,6 +1,6 @@
 # Intuji PHP Assignment
 
-## Connecting to Google Calendar with Core PHP
+Connecting to Google Calendar with Core PHP. This application demonstrates how to connect to Google Calendar using OAuth 2.0 and access the Google Calendar API.
 
 ### Installation
 
