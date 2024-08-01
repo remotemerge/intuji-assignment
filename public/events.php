@@ -15,7 +15,7 @@ $client = (new GoogleAuth())->getClient();
 $events = [];
 
 // Access token is available
-if (isset($_SESSION['access_token'])) {
+if (isset($_SESSION['access_token']) && !$client->isAccessTokenExpired()) {
     $calendarId = 'primary';
     $calendar = new GoogleCalendar();
     $events = $calendar->getEvents($calendarId);
