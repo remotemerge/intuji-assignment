@@ -47,13 +47,12 @@
                     <textarea class="form-control" id="description" name="description"></textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="start_date_time" class="form-label">Start DateTime</label>
-                    <input type="datetime-local" class="form-control" id="start_date_time" name="start_date_time"
-                           required>
+                    <label for="start_date" class="form-label">Start Date</label>
+                    <input type="date" class="form-control" id="start_date" name="start_date" required>
                 </div>
                 <div class="mb-3">
-                    <label for="end_date_time" class="form-label">End DateTime</label>
-                    <input type="datetime-local" class="form-control" id="end_date_time" name="end_date_time" required>
+                    <label for="end_date" class="form-label">End Date</label>
+                    <input type="date" class="form-control" id="end_date" name="end_date" required>
                 </div>
                 <?php if (isset($_SESSION['access_token'])): ?>
                     <button type="submit" class="btn btn-primary">Add Event</button>
