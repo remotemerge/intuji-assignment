@@ -10,3 +10,6 @@ require dirname(__DIR__) . '/vendor/autoload.php';
 // Init dotenv
 $dotenv = Dotenv::createImmutable(dirname(__DIR__));
 $dotenv->load();
+
+// Start the session
+session_start();

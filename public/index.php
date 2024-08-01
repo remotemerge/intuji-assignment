@@ -1,5 +1,4 @@
 <?php include_once '../bootstrap/app.php'; ?>
-<?php session_start(); ?>
 <!doctype html>
 <html lang="en">
 <head>

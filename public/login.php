@@ -5,9 +5,6 @@ declare(strict_types=1);
 // Bootstrap the application
 require dirname(__DIR__) . '/bootstrap/app.php';
 
-// Start the session
-session_start();
-
 // Get the Google client
 $client = (new Intuji\Events\GoogleAuth())->getClient();
 
