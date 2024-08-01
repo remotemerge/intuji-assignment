@@ -30,6 +30,10 @@ final class GoogleAuth
      */
     public function getClient(): Google_Client
     {
+        // Set the access token if available
+        if (isset($_SESSION['access_token'])) {
+            $this->googleClient->setAccessToken($_SESSION['access_token']);
+        }
         return $this->googleClient;
     }
 
