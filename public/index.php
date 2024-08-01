@@ -1,5 +1,6 @@
-<?php include_once '../bootstrap/app.php'; ?>
-<?= session_start(); ?>
+<?php include_once __DIR__ . '/../bootstrap/app.php'; ?>
+<?php include_once __DIR__ . '/functions.php'; ?>
+<?php include_once __DIR__ . '/events.php'; ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -12,7 +13,7 @@
 <body>
 <div class="container">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 mt-3">
             <?php if (isset($_SESSION['access_token'])): ?>
                 <h3>Connected to Google Calendar</h3>
                 <p>You are connected to Google Calendar. You can now add events to your Google Calendar and view
@@ -34,7 +35,7 @@
     <div class="row mt-5">
         <div class="col-md-6">
             <h2>Add Event</h2>
-            <form action="/add-event.php" method="post">
+            <form action="/add-event.php" method="post" id="event_form">
                 <div class="mb-3">
                     <label for="summary" class="form-label">Summary</label>
                     <input type="text" class="form-control" id="summary" name="summary" required>
@@ -48,13 +49,12 @@
                     <textarea class="form-control" id="description" name="description"></textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="start_date_time" class="form-label">Start DateTime</label>
-                    <input type="datetime-local" class="form-control" id="start_date_time" name="start_date_time"
-                           required>
+                    <label for="start_date" class="form-label">Start Date</label>
+                    <input type="datetime-local" class="form-control" id="start_date" name="start_date" required>
                 </div>
                 <div class="mb-3">
-                    <label for="end_date_time" class="form-label">End DateTime</label>
-                    <input type="datetime-local" class="form-control" id="end_date_time" name="end_date_time" required>
+                    <label for="end_date" class="form-label">End Date</label>
+                    <input type="datetime-local" class="form-control" id="end_date" name="end_date" required>
                 </div>
                 <?php if (isset($_SESSION['access_token'])): ?>
                     <button type="submit" class="btn btn-primary">Add Event</button>
@@ -62,12 +62,19 @@
                     <button type="button" class="btn btn-primary" disabled>Add Event</button>
                 <?php endif; ?>
             </form>
+
+            <?php if (isset($_SESSION['success'])): ?>
+                <div class="alert alert-success mt-3" role="alert">
+                    <?= $_SESSION['success'] ?>
+                    <?php unset($_SESSION['success']); ?>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
     <div class="row mt-5 mb-5">
         <div class="col-md-12">
             <h2>Events</h2>
-            <table class="table">
+            <table class="table table-bordered">
                 <thead>
                 <tr>
                     <th>Summary</th>
@@ -82,15 +89,16 @@
                 <?php if (!empty($events)): ?>
                     <?php foreach ($events as $event): ?>
                         <tr>
-                            <td><?= $event->summary ?></td>
+                            <td><a href="<?= $event->htmlLink ?>" target="_blank"
+                                   referrerpolicy="no-referrer"><?= $event->summary ?></a></td>
                             <td><?= $event->location ?></td>
                             <td><?= $event->description ?></td>
-                            <td><?= $event->start->date ?></td>
-                            <td><?= $event->end->date ?></td>
-                            <td>
+                            <td class="text-nowrap"><?= formatDate($event->start->dateTime) ?></td>
+                            <td class="text-nowrap"><?= formatDate($event->end->dateTime) ?></td>
+                            <td class="text-center">
                                 <form action="/delete-event.php" method="post">
                                     <input type="hidden" name="id" value="<?= $event->id ?>">
-                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                    <button type="submit" class="btn btn-outline-danger">Delete</button>
                                 </form>
                             </td>
                         </tr>
@@ -106,4 +114,21 @@
     </div>
 </div>
 </body>
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('event_form');
+        const startDateInput = document.getElementById('start_date');
+        const endDateInput = document.getElementById('end_date');
+
+        form.addEventListener('submit', (event) => {
+            const startDate = new Date(startDateInput.value);
+            const endDate = new Date(endDateInput.value);
+
+            if (endDate <= startDate) {
+                event.preventDefault();
+                alert('End date must be later than start date.');
+            }
+        });
+    });
+</script>
 </html>

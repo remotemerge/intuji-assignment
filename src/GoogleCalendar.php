@@ -8,7 +8,7 @@ use Google\Service\Exception;
 use Google_Service_Calendar;
 use Google_Service_Calendar_Event;
 
-final class GoogleCalendar
+final readonly class GoogleCalendar
 {
     /**
      * Get the events from the Google Calendar
@@ -18,7 +18,6 @@ final class GoogleCalendar
     {
         // Get the Google client
         $client = (new GoogleAuth())->getClient();
-        $client->setAccessToken($_SESSION['access_token']);
 
         // Get the Google Calendar service
         $service = new Google_Service_Calendar($client);
@@ -42,7 +41,6 @@ final class GoogleCalendar
     {
         // Get the Google client
         $client = (new GoogleAuth())->getClient();
-        $client->setAccessToken($_SESSION['access_token']);
 
         // Get the Google Calendar service
         $service = new Google_Service_Calendar($client);
@@ -62,7 +60,6 @@ final class GoogleCalendar
     {
         // Get the Google client
         $client = (new GoogleAuth())->getClient();
-        $client->setAccessToken($_SESSION['access_token']);
 
         // Get the Google Calendar service
         $service = new Google_Service_Calendar($client);
