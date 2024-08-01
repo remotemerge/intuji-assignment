@@ -2,6 +2,12 @@
 
 Connecting to Google Calendar with Core PHP. This application demonstrates how to connect to Google Calendar using OAuth 2.0 and access the Google Calendar API.
 
+### Requirements
+
+- PHP 8.3 or higher
+- Composer 2.7 or higher
+- Google Account
+
 ### Installation
 
 Clone the repository to your local machine and install the dependencies by running:
