@@ -8,7 +8,7 @@ use Google\Service\Exception;
 use Google_Service_Calendar;
 use Google_Service_Calendar_Event;
 
-final class GoogleCalendar
+final readonly class GoogleCalendar
 {
     /**
      * Get the events from the Google Calendar

@@ -7,7 +7,7 @@ namespace Intuji\Events;
 use Google_Client;
 use Google_Service_Calendar;
 
-final class GoogleAuth
+final readonly class GoogleAuth
 {
     private Google_Client $googleClient;
 
@@ -34,6 +34,7 @@ final class GoogleAuth
         if (isset($_SESSION['access_token'])) {
             $this->googleClient->setAccessToken($_SESSION['access_token']);
         }
+
         return $this->googleClient;
     }
 
