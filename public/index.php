@@ -1,5 +1,5 @@
-<?php include_once '../bootstrap/app.php'; ?>
-<?php include_once './events.php'; ?>
+<?php include_once __DIR__ . '/../bootstrap/app.php'; ?>
+<?php include_once __DIR__ . '/events.php'; ?>
 <!doctype html>
 <html lang="en">
 <head>
