@@ -20,9 +20,11 @@ final readonly class GoogleAuth
         $this->googleClient->setClientSecret($_ENV['GOOGLE_CLIENT_SECRET']);
         $this->googleClient->setRedirectUri($_ENV['GOOGLE_REDIRECT_URI']);
 
-        // Add scopes
-        $this->googleClient->addScope(Google_Service_Calendar::CALENDAR_READONLY);
-        $this->googleClient->addScope(Google_Service_Calendar::CALENDAR_EVENTS);
+        // Add required scopes
+        $this->googleClient->setScopes([
+            Google_Service_Calendar::CALENDAR_READONLY,
+            Google_Service_Calendar::CALENDAR_EVENTS
+        ]);
     }
 
     /**
