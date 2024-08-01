@@ -16,7 +16,7 @@ composer install
   - Visit the [Google Cloud Console](https://console.cloud.google.com) and create a new project.
   - Enable the [Google Calendar API](https://console.developers.google.com/apis/library/calendar-json.googleapis.com).
 
-1. **Set Up OAuth 2.0 Client**:
+2. **Set Up OAuth 2.0 Client**:
   - Navigate to the [Google Credentials](https://console.cloud.google.com/apis/credentials) section and create an OAuth 2.0 Client.
   - Duplicate the `.env.dev` file and rename it to `.env`.
   - Update the `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` with the credentials obtained from the OAuth 2.0 Client.
