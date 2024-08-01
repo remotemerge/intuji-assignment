@@ -60,6 +60,13 @@
                     <button type="button" class="btn btn-primary" disabled>Add Event</button>
                 <?php endif; ?>
             </form>
+
+            <?php if (isset($_SESSION['success'])): ?>
+                <div class="alert alert-success mt-3" role="alert">
+                    <?= $_SESSION['success'] ?>
+                    <?php unset($_SESSION['success']); ?>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
     <div class="row mt-5 mb-5">

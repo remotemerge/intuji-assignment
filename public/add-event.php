@@ -41,7 +41,7 @@ $event->setEnd($end);
 try {
     $event = $service->events->insert('primary', $event);
     if ($event && $event->getId()) {
-        $_SESSION['success'] = 'Event added successfully.';
+        $_SESSION['success'] = 'Event added successfully. Event ID: ' . $event->getId();
     }
 } catch (\Google\Service\Exception $e) {
     // Print the error message
