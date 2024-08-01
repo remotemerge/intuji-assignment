@@ -1,4 +1,5 @@
 <?php include_once '../bootstrap/app.php'; ?>
+<?php include_once './events.php'; ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -72,7 +73,7 @@
     <div class="row mt-5 mb-5">
         <div class="col-md-12">
             <h2>Events</h2>
-            <table class="table">
+            <table class="table table-bordered">
                 <thead>
                 <tr>
                     <th>Summary</th>
@@ -87,15 +88,15 @@
                 <?php if (!empty($events)): ?>
                     <?php foreach ($events as $event): ?>
                         <tr>
-                            <td><?= $event->summary ?></td>
+                            <td><a href="<?= $event->htmlLink ?>" target="_blank" referrerpolicy="no-referrer"><?= $event->summary ?></a></td>
                             <td><?= $event->location ?></td>
                             <td><?= $event->description ?></td>
-                            <td><?= $event->start->date ?></td>
-                            <td><?= $event->end->date ?></td>
-                            <td>
+                            <td><?= $event->start->dateTime ?></td>
+                            <td><?= $event->end->dateTime ?></td>
+                            <td class="text-center">
                                 <form action="/delete-event.php" method="post">
                                     <input type="hidden" name="id" value="<?= $event->id ?>">
-                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                    <button type="submit" class="btn btn-outline-danger">Delete</button>
                                 </form>
                             </td>
                         </tr>
