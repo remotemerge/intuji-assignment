@@ -51,7 +51,7 @@ final class GoogleAuth
     public function getAccessToken(string $code): string
     {
         $res = $this->googleClient->fetchAccessTokenWithAuthCode($code);
-        return $res['access_token'];
+        return json_encode($res);
     }
 
     /**
