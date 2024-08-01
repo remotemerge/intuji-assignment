@@ -1,5 +1,5 @@
 <?php include_once '../bootstrap/app.php'; ?>
-<?= session_start(); ?>
+<?php session_start(); ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -12,7 +12,7 @@
 <body>
 <div class="container">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 mt-3">
             <?php if (isset($_SESSION['access_token'])): ?>
                 <h3>Connected to Google Calendar</h3>
                 <p>You are connected to Google Calendar. You can now add events to your Google Calendar and view
